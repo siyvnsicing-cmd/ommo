@@ -1,77 +1,40 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>默黑猫的六月燥热工作室</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div id="opening-layer">
+    <video id="opening-video" autoplay muted playsinline>
+        <source src="opening.mp4" type="video/mp4">
+    </video>
+</div>
 
-    <div id="video-splash">
-        <video id="opening-video" autoplay muted playsinline preload="auto">
-            <source src="opening.mp4" type="video/mp4">
-        </video>
-        <p id="skip-hint">点击继续 →</p>
-    </div>
+<div id="flash-text-layer">
+    <div class="flash-word">我不讨厌你。</div>
+</div>
 
-    <div id="main-stage">
-        <div id="background-layer"></div>
-
-        <div id="interaction-area">
-            <div id="computer-point" class="click-point" data-zone="computer"></div>
-            <div id="cat-point" class="click-point" data-zone="cat"></div>
+<main id="story-container">
+    
+    <section class="scene-section" id="scene-rock">
+        <div class="scene-bg" style="background-image: url('scene1.png');"></div>
+        <div class="scene-mask"></div>
+        <div class="clean-content">
+            <h1 class="visual-title">SOCIAL OVERLOAD.</h1>
+            <p class="manifesto-text">你们在狭窄的铁皮盒子里交换着廉价的呼吸和毫无意义的微光。我把耳机里的吉他失真开到了最大声。摇滚乐是我在这座水泥丛林里，唯一合法的、砸碎你们的仪式。</p>
         </div>
+    </section>
 
-        <div id="cat-bubble">
-            <span class="bubble-tail"></span>
-            <p>GETTING HARD TO TAP?<br>HERE'S MORE.</p>
+    <section class="scene-section" id="scene-anthro">
+        <div class="scene-bg" style="background-image: url('scene2.png');"></div>
+        <div class="scene-mask"></div>
+        <div class="clean-content">
+            <h1 class="visual-title">FIELDWORK.</h1>
+            <p class="manifesto-text">人类总以为频繁的喧嚣等于理解，其实那只是在用噪音掩盖灵魂的空洞。我在看人类学。只有把自己抽离成一个冷冰冰的“田野调查者”，我才能忍受你们的虚伪和聒噪。</p>
         </div>
+    </section>
 
-        <div id="overlay-panels">
-            <div class="overlay-panel" data-panel="flag">
-                <div class="panel-icon">🏳️‍🌈</div>
-                <div class="panel-label">WALL FLAG</div>
-            </div>
-            <div class="overlay-panel" data-panel="books">
-                <div class="panel-icon">📚</div>
-                <div class="panel-label">ANTHROPOLOGY<br>BOOKS</div>
-            </div>
-            <div class="overlay-panel" data-panel="speaker">
-                <div class="panel-icon">🔊</div>
-                <div class="panel-label">SPEAKER</div>
-            </div>
+    <section class="scene-section" id="scene-pride">
+        <div class="scene-bg" style="background-image: url('scene3.png');"></div>
+        <div class="scene-mask"></div>
+        <div class="clean-content">
+            <h1 class="visual-title">PURE ROMANCE.</h1>
+            <p class="manifesto-text">别用你们那套贫瘠的世俗逻辑和分类标签来审视我。你们的爱交织着自私、依赖和妥协，真让人嫌弃。我的爱和我的恨一样，只向最纯粹的灵魂开放。这面旗帜，是我在这口枯井里，死死咬住的、刺眼的浪漫。</p>
         </div>
-    </div>
+    </section>
 
-    <div id="panel-dialog">
-        <div id="panel-dialog-box">
-            <p id="panel-dialog-text"></p>
-            <button id="panel-dialog-close">✕</button>
-        </div>
-    </div>
-
-    <div id="turing-modal">
-        <div id="turing-content">
-            <div id="question-area" class="active">
-                <p id="question-index"></p>
-                <p id="question-text"></p>
-                <div id="answers">
-                    <button class="ans-btn" data-choice="a"></button>
-                    <button class="ans-btn" data-choice="b"></button>
-                </div>
-                <div id="comment-inline">
-                    <p id="comment-text"></p>
-                </div>
-                <button id="continue-btn">继续 →</button>
-            </div>
-            <div id="result-area">
-                <p id="result-text"></p>
-                <button id="close-btn">关闭</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</main>
