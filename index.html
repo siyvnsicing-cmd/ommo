@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>默黑猫的六月燥热工作室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="video-splash">
+        <video id="opening-video" autoplay muted playsinline preload="auto">
+            <source src="opening.mp4" type="video/mp4">
+        </video>
+        <p id="skip-hint">点击继续 →</p>
+    </div>
+
+    <div id="main-stage">
+        <div id="background-layer"></div>
+
+        <div id="interaction-area">
+            <div id="computer-point" class="click-point" data-zone="computer"></div>
+            <div id="cat-point" class="click-point" data-zone="cat"></div>
+        </div>
+
+        <div id="cat-bubble">
+            <span class="bubble-tail"></span>
+            <p>GETTING HARD TO TAP?<br>HERE'S MORE.</p>
+        </div>
+
+        <div id="overlay-panels">
+            <div class="overlay-panel" data-panel="flag">
+                <div class="panel-icon">🏳️‍🌈</div>
+                <div class="panel-label">WALL FLAG</div>
+            </div>
+            <div class="overlay-panel" data-panel="books">
+                <div class="panel-icon">📚</div>
+                <div class="panel-label">ANTHROPOLOGY<br>BOOKS</div>
+            </div>
+            <div class="overlay-panel" data-panel="speaker">
+                <div class="panel-icon">🔊</div>
+                <div class="panel-label">SPEAKER</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel-dialog">
+        <div id="panel-dialog-box">
+            <p id="panel-dialog-text"></p>
+            <button id="panel-dialog-close">✕</button>
+        </div>
+    </div>
+
+    <div id="turing-modal">
+        <div id="turing-content">
+            <div id="question-area" class="active">
+                <p id="question-index"></p>
+                <p id="question-text"></p>
+                <div id="answers">
+                    <button class="ans-btn" data-choice="a"></button>
+                    <button class="ans-btn" data-choice="b"></button>
+                </div>
+                <div id="comment-inline">
+                    <p id="comment-text"></p>
+                </div>
+                <button id="continue-btn">继续 →</button>
+            </div>
+            <div id="result-area">
+                <p id="result-text"></p>
+                <button id="close-btn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
