@@ -1,93 +1,147 @@
-/* 基础重置 */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ==========================================
+   1. 全局基础重置：锁死视口，禁止生硬的默认滚动
+   ========================================== */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
 body, html {
     width: 100%;
     height: 100%;
-    background-color: #000;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #ffffff;
-    overflow: hidden;
+    overflow: hidden; /* 核心：在动画结束前，绝对不允许出现滚动条 */
 }
 
-/* 1. 开场动画层 */
+/* ==========================================
+   2. 开场动画层：强制全屏绝对定位，盖在最顶层
+   ========================================== */
 #opening-layer {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #a3ff00;
-    z-index: 9999;
-    display: flex; justify-content: center; align-items: center;
-    transition: opacity 0.3s ease; /* 动画结束时快速淡出 */
+    position: fixed; /* 锁死在屏幕上 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #a3ff00; /* 亮绿色背景占位 */
+    z-index: 9999; /* 最高的层级，确保挡住后面的一切 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s ease;
 }
-#opening-video { width: 100%; height: 100%; object-fit: contain; }
 
-/* 2. 新增：全屏闪现文字层 */
+#opening-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保视频完美铺满全屏，不留黑边也不变形 */
+}
+
+/* ==========================================
+   3. 闪现文字层：独立全屏层，卡在动画和主页之间
+   ========================================== */
 #flash-text-layer {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #000000; /* 纯黑底色 */
-    z-index: 9998; /* 卡在动画和主页之间 */
-    display: none; /* 初始隐藏，由JS控制显示 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000; /* 纯黑底 */
+    z-index: 9998; /* 仅次于动画层 */
+    display: none; /* 由 JS 动态控制开启 */
     justify-content: center;
     align-items: center;
 }
+
 .flash-word {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: 4px;
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    text-align: center;
 }
 
-/* 3. 全屏滚动容器 */
+/* ==========================================
+   4. 主内容滚动容器：独立于前两层，完全独立运作
+   ========================================== */
 #story-container {
-    width: 100%; height: 100%;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll; /* 允许纵向滚动 */
+    scroll-snap-type: y mandatory; /* 丝滑吸附 */
     scroll-behavior: smooth;
-    opacity: 0;
+    opacity: 0; /* 初始隐藏，等闪现结束再亮起 */
+    z-index: 1; /* 底层 */
 }
-#story-container::-webkit-scrollbar { display: none; }
 
-/* 4. 单个场景块与干净的无边框文字排版 */
+/* 隐藏滚动条美化 */
+#story-container::-webkit-scrollbar { 
+    display: none; 
+}
+
+/* ==========================================
+   5. 单个场景切片与无毛玻璃无边框排版
+   ========================================== */
 .scene-section {
     position: relative;
-    width: 100%; height: 100vh;
+    width: 100%;
+    height: 100vh; /* 每一个场景刚好是一整屏 */
     scroll-snap-align: start;
-    display: flex; align-items: flex-end;
+    display: flex;
+    align-items: flex-end; /* 文字沉在底部 */
     padding: 8vw;
     overflow: hidden;
 }
+
+/* 背景图绝对定位，铺满它所在的那个场景块 */
 .scene-bg {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     z-index: 1;
 }
+
+/* 渐变遮罩：给底部加深阴影，确保不影响文字识别 */
 .scene-mask {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* 稍微加深底部的阴影渐变，确保没有毛玻璃框时文字依然清晰 */
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.6) 100%);
     z-index: 2;
 }
+
+/* 文字容器 */
 .clean-content {
     position: relative;
     z-index: 3;
     max-width: 700px;
 }
+
 .visual-title {
     font-size: 2.8rem;
     font-weight: 900;
-    color: #a3ff00;
+    color: #a3ff00; /* 亮绿色标题 */
     margin-bottom: 20px;
 }
+
 .manifesto-text {
     font-size: 1.1rem;
     line-height: 1.9;
     color: rgba(255, 255, 255, 0.9);
 }
 
+/* 手机端适配 */
 @media (max-width: 768px) {
     .flash-word { font-size: 2.2rem; }
     .visual-title { font-size: 1.8rem; }
