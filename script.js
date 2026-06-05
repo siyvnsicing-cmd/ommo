@@ -7,22 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // 监听开场动画结束
     openingVideo.addEventListener('ended', () => {
         // 1. 动画视频瞬间消失
-        openingLayer.style.opacity = '0';
+        openingLayer.style.display = 'none';
         
+        // 2. 瞬间弹显“我不讨厌你”全屏黑底白字层
+        flashLayer.style.display = 'flex';
+        
+        // 3. 严格强制停留 1 秒（1000毫秒）后，彻底毁灭闪现层
         setTimeout(() => {
-            openingLayer.style.display = 'none';
+            // 【核心修复】不仅隐藏，还要彻底从布局中抹去，绝不阻挡鼠标
+            flashLayer.style.display = 'none'; 
             
-            // 2. 瞬间弹显“我不讨厌你”全屏黑底白字层
-            flashLayer.style.display = 'flex';
+            // 4. 让后面的场景主页显现
+            storyContainer.style.opacity = '1';
             
-            // 3. 严格强制停留 1 秒（1000毫秒）后，没有任何过渡，直接抹除
-            setTimeout(() => {
-                flashLayer.style.display = 'none'; // 一下子消失
-                
-                // 4. 显示后面的场景主页，露出无毛玻璃的纯净背景图
-                storyContainer.style.opacity = '1';
-            }, 1000); 
-
-        }, 300); // 给动画层留一点点丝滑淡出的残影时间
+            // 【核心修复】重新激活滚动和点击功能
+            document.body.style.overflow = 'auto'; 
+            storyContainer.style.pointerEvents = 'auto';
+            
+        }, 1000); 
     });
 });
