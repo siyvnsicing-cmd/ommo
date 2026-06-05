@@ -24,7 +24,7 @@
     <div id="red-test-layer">
         <div id="test-box">
             <div id="test-progress-bar">
-                <span id="test-progress-dot" class="progress-dot">●</span>
+                <span class="progress-dot active">●</span>
                 <span class="progress-dot">●</span>
                 <span class="progress-dot">●</span>
             </div>
@@ -45,36 +45,36 @@
         </div>
     </div>
 
-    <main id="story-container">
-        
-        <section class="scene-section">
+    <div id="narrative-stage">
+
+        <div id="scene-1" class="narrative-scene">
             <div class="scene-bg" style="background-image: url('scene1.png');"></div>
             <div class="scene-mask"></div>
-            <div class="clean-content">
-                <h1 class="visual-title">SOCIAL OVERLOAD.</h1>
-                <p class="manifesto-text">你们在狭窄的铁皮盒子里交换着廉价的呼吸和毫无意义的微光。我把耳机里的吉他失真开到了最大声。摇滚乐是我在这座水泥丛林里，唯一合法的、砸碎你们的仪式。</p>
+            <div class="scene-content" id="scene1-content">
+                <p class="scene-text-block">地铁是最方便的交通工具，但是每次进入都要安检。她明明是公民，却总是被视为危险分子。它明明说是保护她，可是伤害和麻烦却来自它。</p>
+                <button class="scene-btn" id="scene1-btn">来吧，讨厌的人，来玩吧。</button>
             </div>
-        </section>
+        </div>
 
-        <section class="scene-section">
+        <div id="scene-2" class="narrative-scene">
             <div class="scene-bg" style="background-image: url('scene2.png');"></div>
             <div class="scene-mask"></div>
-            <div class="clean-content">
-                <h1 class="visual-title">FIELDWORK.</h1>
-                <p class="manifesto-text">人类总以为频繁的喧嚣等于理解，其实那只是在用噪音掩盖灵魂的空洞。我在看人类学。只有把自己抽离成一个冷冰冰的&ldquo;田野调查者&rdquo;，我才能忍受你们的虚伪和聒噪。</p>
+            <div class="scene-content" id="scene2-content">
+                <p class="scene-text-block">别来找我玩，我不喜欢别人的陪伴。<br>也不要把我忘了，偶尔我也能给你带来乐子。<br>四月适合见面，就在那个时候，<br>我不讨厌所有人，<br>就像你也不会讨厌我一样……吧</p>
+                <button class="scene-btn" id="scene2-btn" disabled>请等待 8 秒</button>
             </div>
-        </section>
+        </div>
 
-        <section class="scene-section">
+        <div id="scene-3" class="narrative-scene">
             <div class="scene-bg" style="background-image: url('scene3.png');"></div>
             <div class="scene-mask"></div>
             <div class="clean-content">
                 <h1 class="visual-title">PURE ROMANCE.</h1>
                 <p class="manifesto-text">别用你们那套贫瘠的世俗逻辑和分类标签来审视我。你们的爱交织着自私、依赖和妥协，真让人嫌弃。我的爱和我的恨一样，只向最纯粹的灵魂开放。这面旗帜，是我在这口枯井里，死死咬住的、刺眼的浪漫。</p>
             </div>
-        </section>
+        </div>
 
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
