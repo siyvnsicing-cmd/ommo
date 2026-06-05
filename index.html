@@ -1,40 +1,81 @@
-<div id="opening-layer">
-    <video id="opening-video" autoplay muted playsinline>
-        <source src="opening.mp4" type="video/mp4">
-    </video>
-</div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>默黑猫 | Spirit Specimen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<div id="flash-text-layer">
-    <div class="flash-word">我不讨厌你。</div>
-</div>
+    <div id="opening-layer">
+        <video id="opening-video" autoplay muted playsinline>
+            <source src="opening.mp4" type="video/mp4">
+        </video>
+    </div>
 
-<main id="story-container">
-    
-    <section class="scene-section" id="scene-rock">
-        <div class="scene-bg" style="background-image: url('scene1.png');"></div>
-        <div class="scene-mask"></div>
-        <div class="clean-content">
-            <h1 class="visual-title">SOCIAL OVERLOAD.</h1>
-            <p class="manifesto-text">你们在狭窄的铁皮盒子里交换着廉价的呼吸和毫无意义的微光。我把耳机里的吉他失真开到了最大声。摇滚乐是我在这座水泥丛林里，唯一合法的、砸碎你们的仪式。</p>
+    <div id="gogogo-layer">
+        <div id="gogogo-box">
+            <p class="gogogo-flash">我不讨厌你。</p>
+            <button id="gogogo-btn">GOGOGO</button>
         </div>
-    </section>
+    </div>
 
-    <section class="scene-section" id="scene-anthro">
-        <div class="scene-bg" style="background-image: url('scene2.png');"></div>
-        <div class="scene-mask"></div>
-        <div class="clean-content">
-            <h1 class="visual-title">FIELDWORK.</h1>
-            <p class="manifesto-text">人类总以为频繁的喧嚣等于理解，其实那只是在用噪音掩盖灵魂的空洞。我在看人类学。只有把自己抽离成一个冷冰冰的“田野调查者”，我才能忍受你们的虚伪和聒噪。</p>
+    <div id="red-test-layer">
+        <div id="test-box">
+            <div id="test-progress-bar">
+                <span id="test-progress-dot" class="progress-dot">●</span>
+                <span class="progress-dot">●</span>
+                <span class="progress-dot">●</span>
+            </div>
+            <div id="test-question-area">
+                <p id="test-question-text"></p>
+                <div id="test-answers">
+                    <button class="test-ans-btn" data-choice="0"></button>
+                    <button class="test-ans-btn" data-choice="1"></button>
+                </div>
+            </div>
+            <div id="test-comment-area">
+                <p id="test-comment-text"></p>
+            </div>
+            <div id="test-finish-area">
+                <p id="test-finish-text">测试完成。<br>毫无意外，你通过了默黑猫的入场资格审核。<br>现在，欢迎进入这座让你不安的工作室。</p>
+                <button id="test-enter-btn">进入工作室 →</button>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section class="scene-section" id="scene-pride">
-        <div class="scene-bg" style="background-image: url('scene3.png');"></div>
-        <div class="scene-mask"></div>
-        <div class="clean-content">
-            <h1 class="visual-title">PURE ROMANCE.</h1>
-            <p class="manifesto-text">别用你们那套贫瘠的世俗逻辑和分类标签来审视我。你们的爱交织着自私、依赖和妥协，真让人嫌弃。我的爱和我的恨一样，只向最纯粹的灵魂开放。这面旗帜，是我在这口枯井里，死死咬住的、刺眼的浪漫。</p>
-        </div>
-    </section>
+    <main id="story-container">
+        
+        <section class="scene-section">
+            <div class="scene-bg" style="background-image: url('scene1.png');"></div>
+            <div class="scene-mask"></div>
+            <div class="clean-content">
+                <h1 class="visual-title">SOCIAL OVERLOAD.</h1>
+                <p class="manifesto-text">你们在狭窄的铁皮盒子里交换着廉价的呼吸和毫无意义的微光。我把耳机里的吉他失真开到了最大声。摇滚乐是我在这座水泥丛林里，唯一合法的、砸碎你们的仪式。</p>
+            </div>
+        </section>
 
-</main>
+        <section class="scene-section">
+            <div class="scene-bg" style="background-image: url('scene2.png');"></div>
+            <div class="scene-mask"></div>
+            <div class="clean-content">
+                <h1 class="visual-title">FIELDWORK.</h1>
+                <p class="manifesto-text">人类总以为频繁的喧嚣等于理解，其实那只是在用噪音掩盖灵魂的空洞。我在看人类学。只有把自己抽离成一个冷冰冰的&ldquo;田野调查者&rdquo;，我才能忍受你们的虚伪和聒噪。</p>
+            </div>
+        </section>
+
+        <section class="scene-section">
+            <div class="scene-bg" style="background-image: url('scene3.png');"></div>
+            <div class="scene-mask"></div>
+            <div class="clean-content">
+                <h1 class="visual-title">PURE ROMANCE.</h1>
+                <p class="manifesto-text">别用你们那套贫瘠的世俗逻辑和分类标签来审视我。你们的爱交织着自私、依赖和妥协，真让人嫌弃。我的爱和我的恨一样，只向最纯粹的灵魂开放。这面旗帜，是我在这口枯井里，死死咬住的、刺眼的浪漫。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
