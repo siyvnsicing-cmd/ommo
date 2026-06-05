@@ -1,6 +1,3 @@
-/* ==========================================
-   1. 全局基础重置：锁死视口，禁止生硬的默认滚动
-   ========================================== */
 * { 
     margin: 0; 
     padding: 0; 
@@ -11,117 +8,309 @@ body, html {
     width: 100%;
     height: 100%;
     background-color: #000000;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     color: #ffffff;
-    overflow: hidden; /* 核心：在动画结束前，绝对不允许出现滚动条 */
+    overflow: hidden;
 }
 
-/* ==========================================
-   2. 开场动画层：强制全屏绝对定位，盖在最顶层
-   ========================================== */
+/* ══════ Opening Video ══════ */
+
 #opening-layer {
-    position: fixed; /* 锁死在屏幕上 */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #a3ff00; /* 亮绿色背景占位 */
-    z-index: 9999; /* 最高的层级，确保挡住后面的一切 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.4s ease;
-}
-
-#opening-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 确保视频完美铺满全屏，不留黑边也不变形 */
-}
-
-/* ==========================================
-   3. 闪现文字层：独立全屏层，卡在动画和主页之间
-   ========================================== */
-#flash-text-layer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000000; /* 纯黑底 */
-    z-index: 9998; /* 仅次于动画层 */
-    display: none; /* 由 JS 动态控制开启 */
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh;
+    background-color: #a3ff00;
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+}
+
+#opening-video { 
+    width: 100%; height: 100%; 
+    object-fit: cover; 
+}
+
+/* ══════ GOGOGO Layer ══════ */
+
+#gogogo-layer {
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh;
+    background-color: #000000;
+    z-index: 9998;
+    display: none;
     justify-content: center;
     align-items: center;
 }
 
-.flash-word {
+#gogogo-layer.show {
+    display: flex;
+}
+
+#gogogo-box {
+    text-align: center;
+}
+
+.gogogo-flash {
     font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: 4px;
     color: #ffffff;
+    margin-bottom: 48px;
+    animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+
+#gogogo-btn {
+    display: inline-block;
+    padding: 18px 56px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#gogogo-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+/* ══════ Red Test Layer ══════ */
+
+#red-test-layer {
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh;
+    background-color: #c30010;
+    z-index: 9997;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#red-test-layer.show {
+    display: flex;
+}
+
+#test-box {
+    width: 82%;
+    max-width: 520px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* progress dots */
+
+#test-progress-bar {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.progress-dot {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 1.2rem;
+    transition: color 0.4s ease;
+}
+
+.progress-dot.active {
+    color: #ffffff;
+}
+
+/* question area */
+
+#test-question-area {
+    width: 100%;
     text-align: center;
 }
 
-/* ==========================================
-   4. 主内容滚动容器：独立于前两层，完全独立运作
-   ========================================== */
-#story-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll; /* 允许纵向滚动 */
-    scroll-snap-type: y mandatory; /* 丝滑吸附 */
-    scroll-behavior: smooth;
-    opacity: 0; /* 初始隐藏，等闪现结束再亮起 */
-    z-index: 1; /* 底层 */
+#test-question-area.hidden {
+    display: none;
 }
 
-/* 隐藏滚动条美化 */
+#test-question-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+#test-answers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.test-ans-btn {
+    padding: 16px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.03em;
+    line-height: 1.45;
+    text-align: left;
+}
+
+.test-ans-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
+}
+
+.test-ans-btn:disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.test-ans-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.test-ans-btn.selected {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* comment area */
+
+#test-comment-area {
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#test-comment-area.show {
+    display: block;
+}
+
+#test-comment-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.85);
+    animation: fadeInComment 0.4s ease;
+}
+
+@keyframes fadeInComment {
+    0%   { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* finish area */
+
+#test-finish-area {
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#test-finish-area.show {
+    display: block;
+}
+
+#test-finish-text {
+    font-size: 1rem;
+    line-height: 1.9;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 36px;
+    animation: fadeInComment 0.6s ease;
+}
+
+#test-enter-btn {
+    display: inline-block;
+    padding: 14px 44px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 4px;
+}
+
+#test-enter-btn:hover {
+    background: #ffffff;
+    color: #c30010;
+}
+
+/* ══════ Story Container ══════ */
+
+#story-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#story-container.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #story-container::-webkit-scrollbar { 
     display: none; 
 }
 
-/* ==========================================
-   5. 单个场景切片与无毛玻璃无边框排版
-   ========================================== */
+/* ══════ Scene Sections ══════ */
+
 .scene-section {
     position: relative;
-    width: 100%;
-    height: 100vh; /* 每一个场景刚好是一整屏 */
+    width: 100%; height: 100vh;
     scroll-snap-align: start;
     display: flex;
-    align-items: flex-end; /* 文字沉在底部 */
+    align-items: flex-end;
     padding: 8vw;
     overflow: hidden;
 }
 
-/* 背景图绝对定位，铺满它所在的那个场景块 */
 .scene-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
     z-index: 1;
 }
 
-/* 渐变遮罩：给底部加深阴影，确保不影响文字识别 */
 .scene-mask {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.6) 100%);
     z-index: 2;
 }
 
-/* 文字容器 */
 .clean-content {
     position: relative;
     z-index: 3;
@@ -131,7 +320,7 @@ body, html {
 .visual-title {
     font-size: 2.8rem;
     font-weight: 900;
-    color: #a3ff00; /* 亮绿色标题 */
+    color: #a3ff00;
     margin-bottom: 20px;
 }
 
@@ -141,9 +330,12 @@ body, html {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* 手机端适配 */
+/* ══════ Responsive ══════ */
+
 @media (max-width: 768px) {
-    .flash-word { font-size: 2.2rem; }
+    .gogogo-flash { font-size: 2.2rem; }
+    #gogogo-btn { padding: 14px 36px; font-size: 1.2rem; }
     .visual-title { font-size: 1.8rem; }
     .manifesto-text { font-size: 0.95rem; }
+    #test-question-text { font-size: 1rem; }
 }
